@@ -15,7 +15,7 @@ public class BlockRegister {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(DieAcNocteMod.MODID);
 
     // Creates a new Block with the id "examplemod:example_block", combining the namespace and path
-    public static final DeferredBlock<Block> ARCANE_ALTAR_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
+    public static final DeferredBlock<Block> ARCANE_ALTAR_BLOCK = BLOCKS.registerSimpleBlock("arcane_altar", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
     // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
-    public static final DeferredItem<BlockItem> ARCANE_ALTAR_BLOCK_ITEM = ItemRegister.ITEMS.registerSimpleBlockItem("example_block", ARCANE_ALTAR_BLOCK);
+    public static final DeferredItem<BlockItem> ARCANE_ALTAR_BLOCK_ITEM = ItemRegister.ITEMS.registerSimpleBlockItem("arcane_altar", ARCANE_ALTAR_BLOCK);
 }
