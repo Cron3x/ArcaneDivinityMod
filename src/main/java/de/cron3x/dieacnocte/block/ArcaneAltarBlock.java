@@ -25,8 +25,7 @@ public class ArcaneAltarBlock extends Block implements EntityBlock {
 
     @Nullable
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
-        return level.isClientSide() ? null : (level0, pos0, state0, blockEntity) -> ((TickingBlockEntity) blockEntity).tick();
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return type == BlockEntityRegister.ARCANE_ALTAR_BLOCKENTITY.get() ? ArcaneAltarBlockEntity::tick : null;
     }
-
 }

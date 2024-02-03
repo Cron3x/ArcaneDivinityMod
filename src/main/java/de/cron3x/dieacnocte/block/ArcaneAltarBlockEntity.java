@@ -6,9 +6,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.TickingBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.client.model.data.ModelData;
@@ -17,24 +16,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class ArcaneAltarBlockEntity extends BlockEntity implements TickingBlockEntity {
+public class ArcaneAltarBlockEntity extends BlockEntity {
     public ArcaneAltarBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(BlockEntityRegister.ARCANE_ALTAR_BLOCKENTITY.get(), pPos, pBlockState);
     }
 
-    @Override
-    public BlockEntityType<?> getType() {
-        return BlockEntityRegister.ARCANE_ALTAR_BLOCKENTITY.get();
-    }
+    public static <T extends BlockEntity> void tick(Level level, BlockPos blockPos, BlockState blockState, T t) {
 
-    @Override
-    public void tick() {
-        System.out.printf("Hello");
-    }
-
-    @Override
-    public BlockPos getPos() {
-        return null;
     }
 
     @Override

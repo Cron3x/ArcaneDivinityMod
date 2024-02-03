@@ -1,6 +1,7 @@
 package de.cron3x.dieacnocte;
 
 import com.mojang.logging.LogUtils;
+import de.cron3x.dieacnocte.block.BlockEntityRegister;
 import de.cron3x.dieacnocte.block.BlockRegister;
 import de.cron3x.dieacnocte.item.ItemRegister;
 import net.minecraft.client.Minecraft;
@@ -46,9 +47,8 @@ public class DieAcNocteMod
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "examplemod" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-
     // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("dieacnocte_tab", () -> CreativeModeTab.builder()
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
@@ -64,6 +64,7 @@ public class DieAcNocteMod
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         BlockRegister.BLOCKS.register(modEventBus);
+        BlockEntityRegister.REGISTER.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         ItemRegister.ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
