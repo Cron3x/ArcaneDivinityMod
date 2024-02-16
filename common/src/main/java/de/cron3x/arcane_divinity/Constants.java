@@ -1,11 +1,11 @@
-package com.example.examplemod;
+package de.cron3x.arcane_divinity;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Constants {
 
-	public static final String MOD_ID = "examplemod";
-	public static final String MOD_NAME = "ExampleMod";
+	public static final String MOD_ID = "arcane_divinity";
+	public static final String MOD_NAME = "ArcaneDivinity";
 	public static final Logger LOG = LoggerFactory.getLogger(MOD_NAME);
 }

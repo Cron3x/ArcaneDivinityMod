@@ -1,7 +1,8 @@
-package com.example.examplemod.platform;
+package de.cron3x.arcane_divinity.platform;
 
-import com.example.examplemod.Constants;
-import com.example.examplemod.platform.services.IPlatformHelper;
+import de.cron3x.arcane_divinity.Constants;
+import de.cron3x.arcane_divinity.platform.services.IPlatformHelper;
+import net.minecraft.world.item.Item;
 
 import java.util.ServiceLoader;
 

@@ -1,4 +1,13 @@
-package com.example.examplemod.platform.services;
+package de.cron3x.arcane_divinity.platform.services;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.function.BiFunction;
 
 public interface IPlatformHelper {
 
@@ -33,4 +42,8 @@ public interface IPlatformHelper {
 
         return isDevelopmentEnvironment() ? "development" : "production";
     }
+
+
+    Item.Properties defaultItemBuilder();
+    <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(BiFunction<BlockPos, BlockState, T> fn, Block... blocks);
 }
