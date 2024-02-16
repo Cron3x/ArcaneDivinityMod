@@ -18,7 +18,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ArcaneAltarBlock extends AbstractWaterLoggableBlock implements EntityBlock {
+public class ArcaneAltarBlock extends AbstractWaterLoggableBlock implements EntityBlock{
     public ArcaneAltarBlock(Properties $$0) {
         super($$0);
     }

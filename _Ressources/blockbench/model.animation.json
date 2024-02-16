@@ -1,27 +1,69 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.arcane_altar.idle": {
-			"loop": true,
-			"animation_length": 2.5,
+		"animation.model.activate": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 0.5,
 			"bones": {
-				"bone2": {
+				"crystall": {
 					"position": {
 						"0.0": {
 							"vector": [0, 0, 0]
 						},
-						"1.0": {
+						"0.5": {
+							"vector": [0, 4, 0]
+						}
+					}
+				}
+			}
+		},
+		"animation.model.deactivate": {
+			"loop": "hold_on_last_frame",
+			"animation_length": 0.5,
+			"bones": {
+				"crystall": {
+					"position": {
+						"0.0": {
 							"vector": [0, 4, 0]
 						},
-						"1.5": {
-							"vector": [0, 4, 0]
-						},
-						"2.5": {
+						"0.5": {
 							"vector": [0, 0, 0]
 						}
 					}
 				}
 			}
+		},
+		"animation.model.active_idle": {
+			"loop": true,
+			"animation_length": 3,
+			"bones": {
+				"crystall": {
+					"position": {
+						"vector": [0, 4, 0]
+					}
+				},
+				"item_rot": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"3.0": {
+							"vector": [0, -365, 0]
+						}
+					}
+				},
+				"counter_rot": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0]
+						},
+						"3.0": {
+							"vector": [0, 365, 0]
+						}
+					}
+				}
+			}
 		}
-	}
+	},
+	"geckolib_format_version": 2
 }

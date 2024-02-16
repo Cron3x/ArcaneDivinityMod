@@ -8,8 +8,22 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import software.bernie.geckolib.animatable.GeoBlockEntity;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity {
+public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity implements GeoBlockEntity {
+
+    protected static final RawAnimation ACTIVATE = RawAnimation.begin().thenPlay("misc.activate");
+    protected static final RawAnimation DEACTIVATE = RawAnimation.begin().thenPlay("misc.deactivate");
+    protected static final RawAnimation ACTIVE_IDLE = RawAnimation.begin().thenLoop("misc.active_idle");
+
+    private final AnimatableInstanceCache animationCache = GeckoLibUtil.createInstanceCache(this);
 
     private int ticks = 0;
     private boolean shouldActivate = false;
@@ -86,5 +100,18 @@ public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity {
     }
     public boolean isShouldActivate() {
         return shouldActivate;
+    }
+
+    @Override
+    public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
+        controllers.add(new AnimationController<>(this, this::deployAnimController));
+    }
+    protected <E extends ArcaneAltarBlockEntity> PlayState deployAnimController(final AnimationState<E> state) {
+        return state.setAndContinue(ACTIVE_IDLE);
+    }
+
+    @Override
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.animationCache;
     }
 }

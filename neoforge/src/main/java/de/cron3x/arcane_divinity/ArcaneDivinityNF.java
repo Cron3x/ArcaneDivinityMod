@@ -3,13 +3,16 @@ package de.cron3x.arcane_divinity;
 
 import de.cron3x.arcane_divinity.common.block.ZBlocks;
 import de.cron3x.arcane_divinity.common.block.block_entity.ZBlockEntities;
+import de.cron3x.arcane_divinity.common.block.block_entity.renderers.ArcaneAltarBlockEntityRenderer;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.function.BiConsumer;
@@ -46,5 +49,10 @@ public class ArcaneDivinityNF {
                 event.register(Registries.ITEM, rl, () -> t);
             });
         }
+    }
+
+    @SubscribeEvent
+    public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(ZBlockEntities.ARCANE_ALTAR_BLOCK_ENTITY, ArcaneAltarBlockEntityRenderer::new);
     }
 }
