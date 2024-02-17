@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import com.google.common.base.Preconditions;
 
 
-public abstract class SimpleInventoryBlockEntity extends AbstractBlockEntity implements Clearable {
+public abstract class SimpleInventoryBlockEntity extends AbstractGeoBlockEntity implements Clearable {
     private final SimpleContainer itemHandler = createItemHandler();
 
     protected SimpleInventoryBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {

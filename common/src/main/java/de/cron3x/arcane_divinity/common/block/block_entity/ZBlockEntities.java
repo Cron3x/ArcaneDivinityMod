@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,15 @@ public class ZBlockEntities {
         for (var be : ALL.entrySet()){
             r.accept(be.getValue(),be.getKey());
         }
+    }
+
+    public static <T extends AbstractGeoBlockEntity> String getId(BlockEntityType<T> be) {
+        for (var type : ALL.entrySet()){
+            if (type.getValue().equals(be)){
+                return type.getKey().getPath();
+            }
+        }
+        return null;
     }
 }
 
