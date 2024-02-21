@@ -19,7 +19,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity implements GeoBlockEntity {
 
-    protected static final RawAnimation ACTIVATE = RawAnimation.begin().thenPlay("animation.arcane_altar.misc.activate");
+    protected static final RawAnimation ACTIVATE = RawAnimation.begin().thenPlay("animation.arcane_altar.misc.activate").thenLoop("animation.arcane_altar.misc.active_idle");
     protected static final RawAnimation DEACTIVATE = RawAnimation.begin().thenPlay("animation.arcane_altar.misc.deactivate");
     protected static final RawAnimation ACTIVE_IDLE = RawAnimation.begin().thenLoop("animation.arcane_altar.misc.active_idle");
 
@@ -104,12 +104,12 @@ public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity implement
         this.shouldBeActive = shouldBeActive;
         this.isActive = false;
         this.ticks = 0;
+        if ( level != null) level.sendBlockUpdated(getBlockPos(), getBlockState(),getBlockState(),2);
     }
 
     @Override
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, state -> {
-            System.out.println("registerControllers:: shouldBeActive = " +shouldBeActive+ " | isActive = "+isActive);
             if (this.shouldBeActive && !this.isActive) {
                 return state.setAndContinue(ACTIVATE);
             } else if (this.shouldBeActive && this.isActive) {
@@ -129,6 +129,7 @@ public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity implement
     public void load(@NotNull CompoundTag tag) {
         this.isActive = tag.getBoolean("is_active");
         this.shouldBeActive = tag.getBoolean("should_be_active");
+        this.ticks = tag.getInt("ticks");
         super.load(tag);
     }
 
@@ -137,5 +138,6 @@ public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity implement
         super.saveAdditional(tag);
         tag.putBoolean("is_active", this.isActive);
         tag.putBoolean("should_be_active", this.shouldBeActive);
+        tag.putInt("ticks", this.ticks);
     }
 }
