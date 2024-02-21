@@ -35,6 +35,10 @@ public class ArcaneDivinityNF {
             bindItems(event, ZBlocks::registerBlockItems);
             bind(event, Registries.BLOCK_ENTITY_TYPE, ZBlockEntities::registerBlockEntities);
         });
+        eventBus.addListener((EntityRenderersEvent.RegisterRenderers event) -> {
+            System.out.println("registerRenderers");
+            event.registerBlockEntityRenderer(ZBlockEntities.ARCANE_ALTAR_BLOCK_ENTITY, DefaultBlockEntityRenderer::new);
+        });
     }
 
     private static <E extends RegisterEvent, T> void bind(E event, ResourceKey<Registry<T>> registry, Consumer<BiConsumer<T, ResourceLocation>> source){
@@ -49,10 +53,5 @@ public class ArcaneDivinityNF {
                 event.register(Registries.ITEM, rl, () -> t);
             });
         }
-    }
-
-    @SubscribeEvent
-    public static void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(ZBlockEntities.ARCANE_ALTAR_BLOCK_ENTITY, DefaultBlockEntityRenderer::new);
     }
 }

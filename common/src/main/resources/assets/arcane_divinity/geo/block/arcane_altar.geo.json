@@ -23,7 +23,7 @@
 					]
 				},
 				{
-					"name": "crystall",
+					"name": "crystal",
 					"parent": "base",
 					"pivot": [0, 13, 0]
 				},
@@ -38,7 +38,7 @@
 				},
 				{
 					"name": "counter_rot",
-					"parent": "crystall",
+					"parent": "crystal",
 					"pivot": [0, -3, 0],
 					"cubes": [
 						{"origin": [-3, 10, -3], "size": [6, 1, 6], "pivot": [0, 9, 0], "rotation": [0, -45, 0], "uv": [37, 14]},

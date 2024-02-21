@@ -18,7 +18,8 @@ public class DefaultBlockModel<T extends AbstractGeoBlockEntity> extends GeoMode
 
     @Override
     public ResourceLocation getModelResource(T animatable) {
-        return new ResourceLocation(Constants.MOD_ID, "models/block/%s.geo.json".formatted(id));
+        System.out.println("id: " +id);
+        return new ResourceLocation(Constants.MOD_ID, "geo/block/%s.geo.json".formatted(id));
     }
 
     @Override

@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.model.activate": {
+		"animation.arcane_altar.misc.activate": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.5,
 			"bones": {
@@ -17,7 +17,7 @@
 				}
 			}
 		},
-		"animation.model.deactivate": {
+		"animation.arcane_altar.misc.deactivate": {
 			"loop": "hold_on_last_frame",
 			"animation_length": 0.5,
 			"bones": {
@@ -33,7 +33,7 @@
 				}
 			}
 		},
-		"animation.model.active_idle": {
+		"animation.arcane_altar.misc.active_idle": {
 			"loop": true,
 			"animation_length": 3,
 			"bones": {
