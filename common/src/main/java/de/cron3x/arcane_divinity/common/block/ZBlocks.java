@@ -12,7 +12,7 @@ import net.minecraft.world.level.material.MapColor;
 import java.util.function.BiConsumer;
 
 public final class ZBlocks {
-    public static final Block arcaneAltarBlock = new ArcaneAltarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DEEPSLATE).strength(3));
+    public static final Block arcaneAltarBlock = new ArcaneAltarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.DEEPSLATE).strength(3).noOcclusion());
 
     public static void registerBlocks(BiConsumer<Block, ResourceLocation> register){
         register.accept(arcaneAltarBlock, ZBlockNames.ARCANE_ALTAR);

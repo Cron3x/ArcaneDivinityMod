@@ -16,8 +16,6 @@ public abstract class AbstractBlock extends Block {
     @Nullable
     @SuppressWarnings("unchecked")
     public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> candidate, BlockEntityType<E> desired, BlockEntityTicker<? super E> ticker) {
-        var a = desired == candidate ? (BlockEntityTicker<A>) ticker : null;
-        System.out.println("brr: "+a);
-        return a;
+        return desired == candidate ? (BlockEntityTicker<A>) ticker : null;
     }
 }

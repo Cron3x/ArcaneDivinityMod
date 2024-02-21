@@ -36,7 +36,6 @@ public class ArcaneDivinityNF {
             bind(event, Registries.BLOCK_ENTITY_TYPE, ZBlockEntities::registerBlockEntities);
         });
         eventBus.addListener((EntityRenderersEvent.RegisterRenderers event) -> {
-            System.out.println("registerRenderers");
             event.registerBlockEntityRenderer(ZBlockEntities.ARCANE_ALTAR_BLOCK_ENTITY, DefaultBlockEntityRenderer::new);
         });
     }

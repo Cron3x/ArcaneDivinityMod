@@ -22,14 +22,6 @@ public abstract class AbstractBlockEntity extends BlockEntity {
         writePacketNBT(tag);
     }
 
-    @NotNull
-    @Override
-    public final CompoundTag getUpdateTag() {
-        var tag = new CompoundTag();
-        writePacketNBT(tag);
-        return tag;
-    }
-
     @Override
     public void load(@NotNull CompoundTag tag) {
         super.load(tag);
@@ -44,5 +36,13 @@ public abstract class AbstractBlockEntity extends BlockEntity {
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @NotNull
+    @Override
+    public CompoundTag getUpdateTag() {
+        var tag = new CompoundTag();
+        saveAdditional(tag);
+        return tag;
     }
 }

@@ -46,7 +46,7 @@ public class ArcaneAltarBlock extends AbstractWaterLoggableBlock implements Enti
             return InteractionResult.PASS;
         }
         if (!(level.getBlockEntity(pos) instanceof ArcaneAltarBlockEntity altar)) return InteractionResult.PASS;
-        altar.setShouldActivate(!altar.isShouldActivate());
+        altar.setShouldBeActive(true);
         altar.setChanged();
         return InteractionResult.SUCCESS;
     }
@@ -60,5 +60,10 @@ public class ArcaneAltarBlock extends AbstractWaterLoggableBlock implements Enti
             }
             super.onRemove(state, world, pos, newState, isMoving);
         }
+    }
+
+    @Override
+    public RenderShape getRenderShape(BlockState $$0) {
+        return RenderShape.ENTITYBLOCK_ANIMATED;
     }
 }
