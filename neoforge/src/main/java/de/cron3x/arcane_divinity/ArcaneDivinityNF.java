@@ -13,6 +13,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.registries.RegisterEvent;
 
 import java.util.function.BiConsumer;
@@ -52,5 +53,9 @@ public class ArcaneDivinityNF {
                 event.register(Registries.ITEM, rl, () -> t);
             });
         }
+    }
+
+    private void tst(){
+
     }
 }

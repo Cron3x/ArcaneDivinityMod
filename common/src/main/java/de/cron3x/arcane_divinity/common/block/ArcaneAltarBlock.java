@@ -1,7 +1,7 @@
 package de.cron3x.arcane_divinity.common.block;
 
 import de.cron3x.arcane_divinity.common.block.block_entity.ArcaneAltarBlockEntity;
-import de.cron3x.arcane_divinity.common.block.block_entity.SimpleInventoryBlockEntity;
+import de.cron3x.arcane_divinity.common.block.block_entity.SimpleInventoryGeoBlockEntity;
 import de.cron3x.arcane_divinity.common.block.block_entity.ZBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.Containers;
@@ -55,7 +55,7 @@ public class ArcaneAltarBlock extends AbstractWaterLoggableBlock implements Enti
     public void onRemove(@NotNull BlockState state, @NotNull Level world, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             BlockEntity be = world.getBlockEntity(pos);
-            if (be instanceof SimpleInventoryBlockEntity inventory) {
+            if (be instanceof SimpleInventoryGeoBlockEntity inventory) {
                 Containers.dropContents(world, pos, inventory.getItemHandler());
             }
             super.onRemove(state, world, pos, newState, isMoving);

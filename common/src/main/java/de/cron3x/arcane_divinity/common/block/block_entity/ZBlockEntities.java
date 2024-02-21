@@ -19,7 +19,9 @@ import java.util.function.BiFunction;
 public class ZBlockEntities {
     private static final Map<ResourceLocation, BlockEntityType<?>> ALL = new HashMap<>();
 
+    public static final BlockEntityType<PedestalBlockEntity> PEDESTAL_BLOCK_ENTITY = assign(ZBlockNames.PEDESTAL, PedestalBlockEntity::new, ZBlocks.pedestalBlock);
     public static final BlockEntityType<ArcaneAltarBlockEntity> ARCANE_ALTAR_BLOCK_ENTITY = assign(ZBlockNames.ARCANE_ALTAR, ArcaneAltarBlockEntity::new, ZBlocks.arcaneAltarBlock);
+    public static final BlockEntityType<ArcaneObeliskBlockEntity> ARCANE_OBELISK_BLOCK_ENTITY = assign(ZBlockNames.ARCANE_OBELISK, ArcaneObeliskBlockEntity::new, ZBlocks.arcaneObeliskBlock);
 
     private static <T extends BlockEntity> BlockEntityType<T> assign(ResourceLocation id, BiFunction<BlockPos, BlockState, T> fn, Block... blocks){
         var ret = Services.PLATFORM.createBlockEntityType(fn, blocks);

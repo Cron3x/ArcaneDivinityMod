@@ -37,4 +37,6 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
     public <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(BiFunction<BlockPos, BlockState, T> fn, Block... blocks) {
         return BlockEntityType.Builder.of(fn::apply, blocks).build(null);
     }
+
+
 }

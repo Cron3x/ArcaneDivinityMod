@@ -1,6 +1,5 @@
 package de.cron3x.arcane_divinity.common.block.block_entity;
 
-import com.google.common.base.Preconditions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -12,11 +11,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
+import com.google.common.base.Preconditions;
 
-public abstract class SimpleInventoryBlockEntity extends AbstractBlockEntity implements Clearable {
+
+public abstract class SimpleInventoryGeoBlockEntity extends AbstractGeoBlockEntity implements Clearable {
     private final SimpleContainer itemHandler = createItemHandler();
 
-    protected SimpleInventoryBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+    protected SimpleInventoryGeoBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
         super(type, pos, state);
         itemHandler.addListener(i -> setChanged());
     }

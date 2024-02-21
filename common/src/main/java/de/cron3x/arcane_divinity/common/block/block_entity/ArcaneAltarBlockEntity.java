@@ -3,21 +3,18 @@ package de.cron3x.arcane_divinity.common.block.block_entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoBlockEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity implements GeoBlockEntity {
+public class ArcaneAltarBlockEntity extends SimpleInventoryGeoBlockEntity implements GeoBlockEntity {
 
     protected static final RawAnimation ACTIVATE = RawAnimation.begin().thenPlay("animation.arcane_altar.misc.activate").thenLoop("animation.arcane_altar.misc.active_idle");
     protected static final RawAnimation DEACTIVATE = RawAnimation.begin().thenPlay("animation.arcane_altar.misc.deactivate");
@@ -28,6 +25,7 @@ public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity implement
     private int ticks = 0;
     private boolean shouldBeActive = false;
     private boolean isActive = false;
+    public boolean isDay = false;
 
     public ArcaneAltarBlockEntity(BlockPos pos, BlockState state) {
         super(ZBlockEntities.ARCANE_ALTAR_BLOCK_ENTITY, pos, state);
@@ -120,6 +118,10 @@ public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity implement
         }));
     }
 
+    public static <T extends ArcaneAltarBlockEntity> boolean getIsDay(T altar){
+        return altar.isDay;
+    }
+
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
         return this.animationCache;
@@ -130,6 +132,7 @@ public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity implement
         this.isActive = tag.getBoolean("is_active");
         this.shouldBeActive = tag.getBoolean("should_be_active");
         this.ticks = tag.getInt("ticks");
+        this.isDay = tag.getBoolean("is_day");
         super.load(tag);
     }
 
@@ -138,6 +141,7 @@ public class ArcaneAltarBlockEntity extends SimpleInventoryBlockEntity implement
         super.saveAdditional(tag);
         tag.putBoolean("is_active", this.isActive);
         tag.putBoolean("should_be_active", this.shouldBeActive);
+        tag.putBoolean("is_day", this.isDay);
         tag.putInt("ticks", this.ticks);
     }
 }
