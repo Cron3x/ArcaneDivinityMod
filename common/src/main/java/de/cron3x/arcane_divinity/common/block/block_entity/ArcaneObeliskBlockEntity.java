@@ -1,18 +1,26 @@
 package de.cron3x.arcane_divinity.common.block.block_entity;
 
+import de.cron3x.arcane_divinity.common.block.ArcaneObeliskBlock;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.Half;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
+import java.util.concurrent.ThreadLocalRandom;
 
-public class ArcaneObeliskBlockEntity extends BlockEntity {
+public class ArcaneObeliskBlockEntity extends AbstractBlockEntity {
 
     private BlockPos altarPos;
+    private int ticks = 0;
 
     public ArcaneObeliskBlockEntity(BlockPos pos, BlockState state) {
         super(ZBlockEntities.ARCANE_OBELISK_BLOCK_ENTITY, pos, state);
@@ -57,5 +65,56 @@ public class ArcaneObeliskBlockEntity extends BlockEntity {
     @Override
     public ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    public static void serverTick(Level level, BlockPos blockPos, BlockState blockState, ArcaneObeliskBlockEntity self) {
+        if (blockState.getValue(ArcaneObeliskBlock.HALF) == DoubleBlockHalf.UPPER) return;
+
+        ++self.ticks;
+
+        ServerLevel serverLevel = (ServerLevel) level;
+
+        if ((self.ticks % 2) == 0) {
+
+            self.flameParticle(serverLevel, blockPos.below(), 15);
+        }
+
+        if ((self.ticks % 20) != 0) return;
+
+        self.ticks = 0;
+
+        if (serverLevel.getBlockEntity(self.altarPos) == null) return;
+        if (!(serverLevel.getBlockEntity(self.altarPos).getType().equals(ZBlockEntities.ARCANE_ALTAR_BLOCK_ENTITY))) return;
+        ArcaneAltarBlockEntity altar = (ArcaneAltarBlockEntity) serverLevel.getBlockEntity(self.altarPos);
+
+        if (altar.isDay) {
+            //self.flameParticle(self.getBlockPos().offset(0,3,0), new ParticleColor(255,255,255), new ParticleColor(255,150,0), 15);
+        } else {
+
+        }
+
+
+    }
+    public static void clientTick(Level level, BlockPos blockPos, BlockState blockState, ArcaneObeliskBlockEntity self){}
+
+    public void flameParticle(ServerLevel serverLevel, BlockPos pos, int intensity) {
+        double xzOffset = 0.25;
+
+        for (int i = 0; i < intensity; i++) {
+            //TODO: add light to pillar tip
+            //TODO: Implement altar like door
+
+            serverLevel.sendParticles(ParticleTypes.CLOUD,
+                    pos.getX() + 0.5 + ThreadLocalRandom.current().nextDouble(-xzOffset / 2, xzOffset / 2),
+                    pos.getY() + 3.5 + ThreadLocalRandom.current().nextDouble(-0.05, 0.2),
+                    pos.getZ() + 0.5 + ThreadLocalRandom.current().nextDouble(-xzOffset / 2, xzOffset / 2),
+                    0, ThreadLocalRandom.current().nextDouble(0.0, 0.05), 0, 0, 0);
+        }
+        for (int i = 0; i < intensity; i++) {
+            serverLevel.sendParticles(
+                    ParticleTypes.ENCHANT,
+                    pos.getX() + 0.5 + ThreadLocalRandom.current().nextDouble(-xzOffset, xzOffset), pos.getY() + 3.5 + ThreadLocalRandom.current().nextDouble(0, 0.7), pos.getZ() + 0.5 + ThreadLocalRandom.current().nextDouble(-xzOffset, xzOffset),
+                    0, ThreadLocalRandom.current().nextDouble(0.0, 0.05f), 0,0,0);
+        }
     }
 }

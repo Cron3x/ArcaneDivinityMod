@@ -1,6 +1,7 @@
 package de.cron3x.arcane_divinity.common.block;
 
 import com.mojang.serialization.MapCodec;
+import de.cron3x.arcane_divinity.common.block.block_entity.ArcaneObeliskBlockEntity;
 import de.cron3x.arcane_divinity.common.block.block_entity.ZBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +17,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -128,5 +131,16 @@ public class ArcaneObeliskBlock extends BaseEntityBlock {
         BlockPos blockpos = pPos.below();
         BlockState blockstate = pLevel.getBlockState(blockpos);
         return pState.getValue(HALF) == DoubleBlockHalf.LOWER ? blockstate.isFaceSturdy(pLevel, blockpos, Direction.UP) : blockstate.is(this);
+    }
+
+    @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        if (level.isClientSide) {
+            return createTickerHelper(type, ZBlockEntities.ARCANE_OBELISK_BLOCK_ENTITY, ArcaneObeliskBlockEntity::clientTick);
+        } else {
+            return createTickerHelper(type, ZBlockEntities.ARCANE_OBELISK_BLOCK_ENTITY, ArcaneObeliskBlockEntity::serverTick);
+        }
+
     }
 }
