@@ -1,7 +1,12 @@
 package de.cron3x.arcane_divinity.platform.services;
 
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.texture.AbstractTexture;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -46,4 +51,35 @@ public interface IPlatformHelper {
 
     Item.Properties defaultItemBuilder();
     <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(BiFunction<BlockPos, BlockState, T> fn, Block... blocks);
+
+
+    /**
+     * @param original
+     * @return
+     */
+    BakedModel wrapPlatformModel(BakedModel original);
+
+    /**
+     *
+     * @param texture
+     * @param filter
+     * @param mipmap
+     */
+    void setFilterSave(AbstractTexture texture, boolean filter, boolean mipmap);
+
+    /**
+     * @param texture
+     */
+    void restoreLastFilter(AbstractTexture texture);
+
+    /**
+     * @param level
+     * @param state
+     * @param pos
+     * @param ps
+     * @param buffers
+     * @param overlay
+     */
+    void tessellateBlock(Level level, BlockState state, BlockPos pos, PoseStack ps, MultiBufferSource buffers, int overlay);
+
 }
