@@ -12,6 +12,9 @@ There will be two kinds of magic -- night and day magic -- it will have differen
 ### Night
 - use the power of different entities (life, ?)
 
+### Mana
+Vitamin D wird am Tag generiert und Vitamin N in der Nacht, ersetzt Mana
+
 #### Add libs
 - [ ] Curios API
 - [ ] JEI
