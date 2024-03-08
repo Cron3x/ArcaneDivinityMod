@@ -15,6 +15,9 @@ There will be two kinds of magic -- night and day magic -- it will have differen
 ### Mana
 Vitamin D wird am Tag generiert und Vitamin N in der Nacht, ersetzt Mana
 
+### Find altar Structure
+use triangulation, Jakob's staff and sextand
+
 #### Add libs
 - [ ] Curios API
 - [ ] JEI
